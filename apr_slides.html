@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sistema HandBunny</title>
     <!-- CSS-->
-    <link href="css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="css/bootstrap.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
 
     <!-- Fim - CSS-->
@@ -15,8 +15,8 @@
     <div class="container">
         <header class="d-flex justify-content-center py-3">
           <ul class="nav nav-pills">
-            <li class="nav-item"><a href="#" class="nav-link" aria-current="page">Página Inicial</a></li>
-            <li class="nav-item"><a href="#" class="nav-link active">Apresentação de Slides</a></li>
+            <li class="nav-item"><a href="index.html" class="nav-link" aria-current="page">Página Inicial</a></li>
+            <li class="nav-item"><a href="apr_slides.html" class="nav-link active">Apresentação de Slides</a></li>
             <li class="nav-item"><a href="#" class="nav-link">Desenho em Tela</a></li>
             <li class="nav-item"><a href="#" class="nav-link">?</a></li>
           </ul>
@@ -42,7 +42,6 @@
                   <input type="file" class="form-control" id="inputGroupFile" aria-label="Carregar">
                 </div>
               </div>
-              
 
               <div>
                 <button class="btn btn-primary" id="prev">Anterior</button>
@@ -71,14 +70,14 @@
 
               <!--Camera webcam-->
                 <div class="row">       
-                  <video class="input_video"style="width: 100%; height: 100%; display: none;"></video>
+                  <video class="input_video"style="width: 100%; height: 100%; display:none"></video>
                 </div>
               <!--Fim - Camera webcam-->
 
               <!--Output com sinais-->
                 <div class="row">       
                     <canvas class="output_canvas" style="display: flex; justify-content: center; align-items: center;"></canvas>
-                    <div class="caption">Direção do dedo: <span id="finger-direction"></span></div>
+                    <div class="caption">Direção do dedo: <span id="finger-direction" value="finger-direction"></span></div>
                 </div>
               <!--Fim - Output com sinais-->
 
@@ -109,50 +108,50 @@
       const videoElement = document.getElementsByClassName('input_video')[0];
       const canvasElement = document.getElementsByClassName('output_canvas')[0];
       const canvasCtx = canvasElement.getContext('2d');
-
-      // Função que verifica a direção do dedo indicador
-      function checkFingerDirection(handLandmarks)
-      {
-        // posicao do dedo indicador (indice 8) e do polegar (indice 4)
-        const thumbPos = handLandmarks[4];
-        const indexPos = handLandmarks[8];
-
-        if (indexPos.x > thumbPos.x) {
-          return "Direita";
-        } else {
-          return "Esquerda";
-        }
-      }
-      const fingerDirectionElement = document.getElementById('finger-direction');
-      // Fim - Função que verifica a direção do dedo indicador
-
+      
       // Função que processa os resultados da detecção de mãos
       function onResults(results)
       {
         canvasCtx.save();
-
          // Limpa o canvas
         canvasCtx.clearRect( 0, 0, canvasElement.width, canvasElement.height );
         canvasCtx.drawImage( results.image, 0, 0, canvasElement.width, canvasElement.height );
-
         if (results.multiHandLandmarks)
         {
           for (const landmarks of results.multiHandLandmarks)
           {
             drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS,  {color: '#F1FAEE', lineWidth: 3}  );
-            drawLandmarks(canvasCtx, landmarks, {color: '#E63946', lineWidth: 0.1});
+            drawLandmarks(canvasCtx, landmarks, {color: '#E63946', lineWidth: 1});
 
-            // verifica a direção do dedo indicador
-            const direction = checkFingerDirection(landmarks);
-            // Atualiza a legenda com a direção do dedo indicador
-            fingerDirectionElement.textContent = checkFingerDirection(landmarks);
+             // verifica a direção do dedo indicador
+             const direction = checkFingerDirection(landmarks);
+             // Atualiza a legenda com a direção do dedo indicador
+             fingerDirectionElement.textContent = checkFingerDirection(landmarks);
+             
 
-            // muda o slide de acordo com a direção do dedo indicador
-            changeSlide(direction);  
           }
         }
         canvasCtx.restore();
       }
+
+       // Função que verifica a direção do dedo indicador
+       function checkFingerDirection(handLandmarks)
+       {
+         // posicao do dedo indicador (indice 8) e do polegar (indice 4)
+         const thumbPos = handLandmarks[4];
+         const indexPos = handLandmarks[8];
+ 
+         if (indexPos.x > thumbPos.x)
+         {
+           return "Direita";
+         }
+         else
+         {
+           return "Esquerda";
+         }
+       }
+      const fingerDirectionElement = document.getElementById('finger-direction');
+      // Fim - Função que verifica a direção do dedo indicador
 
       // Configura o detector de mãos do MediaPipe Hands
       const hands = new Hands({locateFile: (file) => {
@@ -161,7 +160,7 @@
 
       hands.setOptions({
         selfieMode: true,
-        maxNumHands: 2,
+        maxNumHands: 1,
         modelComplexity: 1,
         minDetectionConfidence: 0.5,
         minTrackingConfidence: 0.5
@@ -174,18 +173,12 @@
         onFrame: async () => {
           await hands.send({image: videoElement});
         },
-        width: 1920,
-        height: 1080
+        width: 1024,
+        height: 768
       });
-
       camera.start();
-    </script>
-    <!-- Fim - Reconhecimento das maos-->
 
-
-    
-    <!-- Apresentação em PDF -->
-    <script>
+      //PDF
       var pdfjsLib = window['pdfjs-dist/build/pdf'];
       pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
 
@@ -251,11 +244,10 @@
       document.getElementById('prev').addEventListener('click', onPrevPage);
       // Fim - Função que muda para a página anterior
 
-
       // Função que muda para a proxima página
       function onNextPage()
       {
-        if (pageNum >= pdfDoc.numPages)
+        if (pageNum >= pdfDoc.numPages) 
         {
           return;
         }
@@ -282,6 +274,8 @@
         };
         fileReader.readAsArrayBuffer(file);
       });
+
+    // Fim - PDF
 
     </script>
     <!-- Fim - Apresentação em PDF -->
