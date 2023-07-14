@@ -4603,11 +4603,12 @@ textarea.form-control-lg {
   font-size: var(--bs-badge-font-size);
   font-weight: var(--bs-badge-font-weight);
   line-height: 1;
-  color: var(--bs-badge-color);
+  color: #EF233C;
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
   border-radius: var(--bs-badge-border-radius);
+  background-color: #EF233C;
 }
 .badge:empty {
   display: none;
@@ -6656,12 +6657,12 @@ textarea.form-control-lg {
 
 .text-bg-primary {
   color: #fff !important;
-  background-color: RGBA(30, 48, 243, var(--bs-bg-opacity, 1)) !important;
+  background-color: #EF233C !important;
 }
 
 .text-bg-secondary {
-  color: #000 !important;
-  background-color: RGBA(226, 30, 128, var(--bs-bg-opacity, 1)) !important;
+  color: #fff !important;
+  background-color: #000 !important;
 }
 
 .text-bg-success {
