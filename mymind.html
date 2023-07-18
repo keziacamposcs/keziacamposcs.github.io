@@ -1,22 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <meta charset=utf-8>
-        <title>3D Sandbox</title>
-        <style>
-html, body {
-            margin: 0px;
-            background-color: #efefef;
-        }
-        canvas {
-            position: absolute;
-            height: 100vh;
-            width: 100vw;
-            overflow: hidden;
-        }        </style>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Kezia Campos</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Custom Google font-->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
     </head>
-    <body>
-      <h1>3D Sandbox</h1>
-      <script type="module" src="main.js"></script>
-   </body>
+    <body class="d-flex flex-column h-100">
+                    <!-- My Mind-->
+            <section class="py-5" style="background-color: #f6f6f6;">
+                <div class="container px-5">
+                    <div class="row gx-5 justify-content-center">
+                        <div class="col-xxl-8">
+                            <h2 class="display-5 fw-bolder"><span class="text-gradient d-inline">How my ideas work on my mind...</span></h2>
+                            <span class="justify-content-center">Move the images with the mouse</span>
+                           
+                            <div class="col-12" id="container" style="width:auto ; height: 500px;">
+                                <script type="module" src="main.js"></script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Fim - My Mind-->
+        <!-- Footer-->
+        <footer class=" py-4 mt-auto" style="background-color: #2B2D42;">
+            <div class="container px-5">
+                <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+                    <div class="col-auto text-white"><div class="small m-0">Copyright &copy; Kezia Campos 2023</div></div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+
+        <script type="text/javascript">
+        function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'pt', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        }
+        </script>
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    </body>
 </html>
