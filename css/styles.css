@@ -43,7 +43,7 @@
   --bs-light: #f8f9fa;
   --bs-dark: #212529;
   --bs-primary-rgb: 43, 45, 66;
-  --bs-secondary-rgb: 226, 30, 128;
+  --bs-secondary-rgb: 239, 35, 60;
   --bs-success-rgb: 25, 135, 84;
   --bs-info-rgb: 13, 202, 240;
   --bs-warning-rgb: 255, 193, 7;
@@ -600,7 +600,26 @@ progress {
 .img-fluid {
   max-width: 100%;
   height: auto;
+  position: relative; /* Ou outro valor que não seja 'static', conforme necessário */
+  z-index: -1; /* Valor negativo para empurrar a imagem para trás dos outros elementos */
 }
+.background-image {
+  position: absolute;
+  z-index: -1; /* Coloca a imagem atrás de todos os outros conteúdos */
+  top: 0;      /* A imagem começa no topo do container */
+  left: 0;     /* A imagem começa na esquerda do container */
+  width: 100%; /* A imagem ocupa a largura total do container */
+  height: 100%;/* A imagem ocupa a altura total do container */
+}
+Agora, sua imagem emoji5.png será exibida como um fundo, enquanto seu card (e outros conteúdos) aparecerão por cima dela.
+
+No entanto, um pequeno ajuste pode ser necessário, dependendo do layout específico desejado e de como outros elementos da página estão configurados. Fique à vontade para ajustar as propriedades de CSS conforme necessário!
+
+
+
+
+
+
 
 .img-thumbnail {
   padding: 0.25rem;
@@ -3002,7 +3021,7 @@ textarea.form-control-lg {
   --bs-btn-hover-color: #000;
   --bs-btn-hover-bg: #2B2D42;
   --bs-btn-hover-border-color: #2B2D42;
-  --bs-btn-focus-shadow-rgb: 226, 30, 128;
+  --bs-btn-focus-shadow-rgb: 239, 35, 60;
   --bs-btn-active-color: #000;
   --bs-btn-active-bg: #2B2D42;
   --bs-btn-active-border-color: #2B2D42;
